@@ -121,6 +121,15 @@ final class MovieQuizViewController: UIViewController {
         let questionNumber: String
     }
     
+    struct QuizResultsViewModel {
+      // строка с заголовком алерта
+      let title: String
+      // строка с текстом о количестве набранных очков
+      let text: String
+      // текст для кнопки алерта
+      let buttonText: String
+    }
+    
     
     private var currentQuestionIndex = 0
     
@@ -155,10 +164,14 @@ final class MovieQuizViewController: UIViewController {
     }
     private func showNextQuestionOrResults()  {
         if currentQuestionIndex == questions.count - 1 {
-            showQuizResults()
+            let text = "Ваш результат: \(correctAnswers)/10" // 1
+                    let viewModel = QuizResultsViewModel( // 2
+                        title: "Этот раунд окончен!",
+                        text: text,
+                        buttonText: "Сыграть ещё раз")
+                    show(quiz: viewModel)
         } else {
             currentQuestionIndex += 1
-            
             let nextQuestion = questions[currentQuestionIndex]
             let viewModel = convert(model: nextQuestion)
             
@@ -184,6 +197,25 @@ final class MovieQuizViewController: UIViewController {
         
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    private func show(quiz result: QuizResultsViewModel) {
+        let alert = UIAlertController(
+                title: result.title,
+                message: result.text,
+                preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: result.buttonText, style: .default) { _ in
+                self.currentQuestionIndex = 0
+                self.correctAnswers = 0
+                
+                let firstQuestion = self.questions[self.currentQuestionIndex]
+                let viewModel = self.convert(model: firstQuestion)
+                self.show(quizStep: viewModel)
+            }
+            
+            alert.addAction(action)
+            
+            self.present(alert, animated: true, completion: nil)
     }
 }
 /*
