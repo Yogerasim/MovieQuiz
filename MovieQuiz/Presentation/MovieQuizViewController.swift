@@ -7,8 +7,9 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupFonts()
+        setButtonsEnabled(true)
 
-        imageView.layer.cornerRadius = 15
+        imageView.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
 
         let firstQuestion = questions[currentQuestionIndex]
@@ -75,9 +76,16 @@ final class MovieQuizViewController: UIViewController {
         imageView.image = quizStep.image
         textLabel.text = quizStep.question
         counterLabel.text = quizStep.questionNumber
+        
+        imageView.layer.borderWidth = 0
+        imageView.layer.borderColor = UIColor.clear.cgColor
+        
+        setButtonsEnabled(true)
     }
 
     private func showAnswerResult(isCorrect: Bool) {
+        setButtonsEnabled(false)
+        
         if isCorrect {
             correctAnswers += 1
         }
@@ -129,6 +137,11 @@ final class MovieQuizViewController: UIViewController {
 
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func setButtonsEnabled(_ isEnabled: Bool) {
+        yesLabel.isEnabled = isEnabled
+        noLabel.isEnabled = isEnabled
     }
 
     // MARK: - Models
