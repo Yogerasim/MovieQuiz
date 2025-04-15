@@ -69,7 +69,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="noBottonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="058-c4-kVG"/>
+                                                    <action selector="noButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QWs-TV-OBI"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PPO-wp-jGa">
@@ -87,7 +87,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="yesButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gY9-tc-SRw"/>
+                                                    <action selector="yesButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oA9-zK-iA1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -110,12 +110,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="counterLabel" destination="bY7-tF-fB0" id="FLC-LM-AT9"/>
-                        <outlet property="imageView" destination="Hm7-bw-9y4" id="net-OF-vWK"/>
-                        <outlet property="noLabel" destination="AhN-Qo-lTi" id="hgJ-jz-Kfv"/>
-                        <outlet property="questionTitleLabel" destination="QFQ-iW-wi3" id="U19-ji-WGj"/>
-                        <outlet property="textLabel" destination="LNr-oR-f0c" id="gac-Ea-zbJ"/>
-                        <outlet property="yesLabel" destination="PPO-wp-jGa" id="Gef-gB-a8l"/>
+                        <outlet property="movieImageView" destination="Hm7-bw-9y4" id="reS-aQ-hJq"/>
+                        <outlet property="noButton" destination="AhN-Qo-lTi" id="SgT-oq-B4e"/>
+                        <outlet property="questionCounterLabel" destination="bY7-tF-fB0" id="2vS-8g-JFa"/>
+                        <outlet property="questionTextLabel" destination="LNr-oR-f0c" id="9tj-eQ-tOf"/>
+                        <outlet property="questionTitleTextLabel" destination="QFQ-iW-wi3" id="Xsx-Cr-R5d"/>
+                        <outlet property="yesButton" destination="PPO-wp-jGa" id="Vc8-z7-oNo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
