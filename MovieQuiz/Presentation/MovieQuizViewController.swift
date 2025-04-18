@@ -10,6 +10,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private let questionsAmount = 10
     private var questionFactory: QuestionFactory = QuestionFactory()
     private var alertPresenter: AlertPresenter?
+    private let statisticService: StatisticServiceProtocol = StatisticServiceImplementation()
 
     // MARK: - Outlets
 
@@ -28,6 +29,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         questionFactory.setup(delegate: self)
         alertPresenter = AlertPresenter(viewController: self)
         startNewGame()
+        
     }
 
     // MARK: - UI Setup
@@ -109,11 +111,27 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
 
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
+            
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+
+            let bestGame = statisticService.bestGame
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            let bestDate = dateFormatter.string(from: bestGame.date)
+
+            let message = """
+            Ваш результат: \(correctAnswers)/\(questionsAmount)
+            Количество игр: \(statisticService.gamesCount)
+            Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestDate))
+            Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+            """
+
             let resultViewModel = QuizResultsViewModel(
                 title: "Этот раунд окончен!",
-                text: "Ваш результат: \(correctAnswers)/\(questionsAmount)",
+                text: message,
                 buttonText: "Сыграть ещё раз"
             )
+            
             show(quiz: resultViewModel)
         } else {
             currentQuestionIndex += 1
